@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
-    "lint": "./node_modules/.bin/eslint **/*.js"
+    "lint": "./node_modules/.bin/eslint src/**/*.js --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.2",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.10"
   }
 }
