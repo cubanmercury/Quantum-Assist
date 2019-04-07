@@ -19,8 +19,6 @@ module.exports = {
         "vue"
     ],
     "rules": {
-    },
-    rules: {
         'no-console': 'off',
     }
     
