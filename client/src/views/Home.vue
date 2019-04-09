@@ -16,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .home img{
+    max-width: 150px;
+    width: 100%;
+    margin: 20px auto;
+  }
+</style>
