@@ -22,6 +22,8 @@ app.use(session({
     saveUninitialized: true
 }))
 
+app.listen(config.port);
+/*
 db.connect((err) => {
     if(err){
         console.log("DB Connection Failed \n" + err);
@@ -31,5 +33,5 @@ db.connect((err) => {
         console.log("DB Connection Successful");
     }
 })
-
+*/
 module.exports = app;

@@ -1,9 +1,11 @@
 module.exports = {
     port: 8081,
     db: {
-        host: "localhost",
-        user: "root",
-        password: "Create_Entropy99",
-        database: "quantum_assist",
+        host: process.env.MYSQL_HOST,
+        user: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASS,
+        database: process.env.MYSQL_DB,
+        connectionLimit: 10,
+        supportBigNumbers: true
     }
 }
