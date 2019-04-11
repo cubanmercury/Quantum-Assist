@@ -4,10 +4,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
 const db = require('../models/db.js');  //mysql database connection path
-const routes = require('./routes');
 const config = require('../src/config/config');
 
 const app = express();
+const routes = require('./routes')(app);
 
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
@@ -22,4 +22,14 @@ app.use(session({
     saveUninitialized: true
 }))
 
-app.listen(config.port);
+db.connect((err) => {
+    if(err){
+        console.log("DB Connection Failed \n" + err);
+    }
+    else{
+        app.listen(config.port);
+        console.log("DB Connection Successful");
+    }
+})
+
+module.exports = app;
