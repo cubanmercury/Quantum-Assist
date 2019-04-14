@@ -1,11 +1,13 @@
 <template>
     <div>
         <Register />
-        <input type="text" name="username" v-model="username" placeholder="Enter Username">
-        <input type="email" name="email" v-model="email" placeholder="Enter Email">
-        <input type="text" name="name" v-model="name" placeholder="Enter your Name">
-        <input type="password" name="password" v-model="password" placeholder="Enter Password">
-        <input @click="register" type="submit" value="Register">
+        <div class="register-form">
+            <input type="text" name="username" v-model="username" placeholder="Username">
+            <input type="email" name="email" v-model="email" placeholder="Email">
+            <input type="text" name="name" v-model="name" placeholder="Name">
+            <input type="password" name="password" v-model="password" placeholder="Password">
+            <input @click="register" type="submit" value="Register">
+        </div>
     </div>
     
 </template>
@@ -37,13 +39,27 @@ export default {
                 u_hashedPwd: this.password,
                 u_signedUp: dateString
             });
-            console.log(response.data);
+            //console.log(response.data);
             
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    .register-form{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        margin: 0 auto;
+    }
+    .register-form input{
+        box-sizing: border-box;
+        margin: 5px 0;
+        width: 100%;
+        padding: 0;
+        text-align: center;
+    }
 </style>
