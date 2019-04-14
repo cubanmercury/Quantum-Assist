@@ -1,8 +1,6 @@
 const db = require('../models/db.js');
 
-exports.post = (req, res) => {
-    db.createUser()
-}
+
 
 
 module.exports = (app) => {
@@ -14,12 +12,9 @@ module.exports = (app) => {
     
     
     
-    app.post('/regster', (req, res) => {
-        exports.post = (req, res) => {
-            db.postUser()
-        }
-    })
+  
 
+    /*
     app.post('/register', (req, res) => {
         res.send({
             message: `Hello ${req.body.email}, you are now registered`
@@ -34,4 +29,5 @@ module.exports = (app) => {
         })
         
     })
+    */
 }

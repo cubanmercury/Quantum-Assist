@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
@@ -9,18 +10,27 @@ const config = require('../src/config/config');
 const app = express();
 const routes = require('./routes')(app);
 
+//middleware
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }))
 app.use(cors());
+app.use(cookieParser());
 
 app.use(session({
     secret: 'cactus snacks',
     resave: false,
     saveUninitialized: true
 }))
+
+//import routes
+const registerRouter = require('../routes/register');
+
+//assigning paths to routes
+app.use('/register', registerRouter);
+
 
 app.listen(config.port);
 /*
