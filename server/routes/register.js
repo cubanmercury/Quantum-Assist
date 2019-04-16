@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/db.js');
 
-
 router.post('/', (req, res, next) => {
+    const data = req.body;
     db.getConnection((err, conn) => {
         if(err){
             console.log("DB Connection Failed" + err);
-        }else{
-            conn.query('SELECT * FROM users WHERE u_email LIKE ?', req.body.u_email, (err, result, fields) => {
+        }
+        else if(!data.u_username || !data.u_email || !data.u_name || !data.u_hashedPwd){
+            console.log("register fields empty");
+            return res.redirect(400, '/register?reg=empty');
+        }
+        else{
+            conn.query('SELECT * FROM users WHERE u_email LIKE ?', data.u_email, (err, result, fields) => {
                 if (err){
                     console.log(err);
                 }
@@ -16,12 +21,11 @@ router.post('/', (req, res, next) => {
                     console.log("user already exists");
                     console.log(result);
                     conn.release();
-                    res.redirect(400, '/register');
-                    return;
+                    return res.redirect(400, '/register?reg=userexists');
                 }
                 else{
                     const insertSql = "INSERT INTO users (u_username, u_email, u_name, u_hashedPwd, u_signedUp) VALUES (?, ?, ?, ?, ?)";
-                    const insertSqlValues = [req.body.u_username, req.body.u_email, req.body.u_name, req.body.u_hashedPwd, req.body.u_signedUp];
+                    const insertSqlValues = [data.u_username, data.u_email, data.u_name, data.u_hashedPwd, data.u_signedUp];
                     console.log(insertSqlValues);
                     conn.query(insertSql, insertSqlValues, (err, result, fields) => {
                         if(err){
@@ -32,11 +36,10 @@ router.post('/', (req, res, next) => {
                             //console.log(fields);
                         }
                         conn.release();
-                        res.redirect(201, '/register');
+                        return res.redirect(201, '/register');
                     });
                 }
             })
-            
         }
     })
 })
