@@ -1,13 +1,19 @@
 <template>
     <div>
         <Register />
-        <div class="register-form">
+        <p v-if="errors.length">
+            <ul>
+                <li v-for="error in errors" :key="error.id">{{error}}</li>
+            </ul>
+        </p>
+        <form class="register-form" @submit="checkForm" id="registerForm" novalidate="true">
             <input type="text" name="username" v-model="username" placeholder="Username">
             <input type="email" name="email" v-model="email" placeholder="Email">
             <input type="text" name="name" v-model="name" placeholder="Name">
             <input type="password" name="password" v-model="password" placeholder="Password">
+            <input type="password" name="password2" v-model="password2" placeholder="Confirm Password">
             <input @click="register" type="submit" value="Register">
-        </div>
+        </form>
     </div>
     
 </template>
@@ -25,7 +31,9 @@ export default {
             username: '',
             email: '',
             name: '',
-            password: ''
+            password: '',
+            password2: '',
+            errors: []
         }
     },
     methods: {
@@ -40,7 +48,37 @@ export default {
                 u_signedUp: dateString
             });
             //console.log(response.data);
+        },
+        checkForm(e) {
+            this.errors = [];
+            if(!this.username){
+                this.errors.push('username required');
+            }
+            else if(!this.email){
+                this.errors.push('email required');
+            }
+            else if(!this.validEmail(this.email)){
+                this.errors.push('please enter a valid email');
+            }
+            else if(this.password !== this.password2){
+                this.errors.push('passwords don\'t match');
+            }
+            else{
+                e.preventDefault();
+                this.register();
+                this.errors.push('Registration Successful')
+                this.username = "";
+                this.email = "";
+                this.name = "";
+                this.password = "";
+                this.password2 = "";
+            }
+            e.preventDefault();
             
+        },
+        validEmail(email){
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
         }
     }
 }

@@ -19,27 +19,40 @@ router.post('/', (req, res, next) => {
                     console.log(err);
                 }
                 else if(result[0]){
-                    console.log("user already exists");
+                    console.log("email already used for another user");
                     console.log(result);
                     conn.release();
-                    return res.redirect(400, '/register?reg=userexists');
+                    return res.redirect(400, '/register?reg=emailused');
                 }
                 else{
-                    const insertSql = "INSERT INTO users (u_username, u_email, u_name, u_hashedPwd, u_signedUp) VALUES (?, ?, ?, ?, ?)";
-                    const hashedPwd = bcrypt.hashSync(data.u_hashedPwd, 10);
-                    const insertSqlValues = [data.u_username, data.u_email, data.u_name, hashedPwd, data.u_signedUp];
-                    console.log(insertSqlValues);
-                    conn.query(insertSql, insertSqlValues, (err, result, fields) => {
-                        if(err){
+                    conn.query('SELECT * FROM users WHERE u_username LIKE ?', data.u_username, (err, result, fields) => {
+                        if (err){
                             console.log(err);
                         }
-                        else{
-                            //console.log(result);
-                            //console.log(fields);
+                        else if(result[0]){
+                            console.log("user already exists");
+                            console.log(result);
+                            conn.release();
+                            return res.redirect(400, '/register?reg=userexists');
                         }
-                        conn.release();
-                        return res.redirect(201, '/register');
-                    });
+                        else{
+                            const insertSql = "INSERT INTO users (u_username, u_email, u_name, u_hashedPwd, u_signedUp) VALUES (?, ?, ?, ?, ?)";
+                            const hashedPwd = bcrypt.hashSync(data.u_hashedPwd, 10);
+                            const insertSqlValues = [data.u_username, data.u_email, data.u_name, hashedPwd, data.u_signedUp];
+                            console.log(insertSqlValues);
+                            conn.query(insertSql, insertSqlValues, (err, result, fields) => {
+                                if(err){
+                                    console.log(err);
+                                }
+                                else{
+                                    //console.log(result);
+                                    //console.log(fields);
+                                    conn.release();
+                                    return res.redirect(201, '/register');
+                                }
+                            });
+                        }
+                    })
                 }
             })
         }

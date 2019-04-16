@@ -11,11 +11,3 @@ export default {
         })
     }
 }
-
-
-/*
-AuthenticationService.register({
-    email: 'test@mail.com',
-    password: '12345'
-})
-*/
