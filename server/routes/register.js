@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/db.js');
+const bcrypt = require('bcryptjs');
 
 router.post('/', (req, res, next) => {
     const data = req.body;
@@ -25,7 +26,8 @@ router.post('/', (req, res, next) => {
                 }
                 else{
                     const insertSql = "INSERT INTO users (u_username, u_email, u_name, u_hashedPwd, u_signedUp) VALUES (?, ?, ?, ?, ?)";
-                    const insertSqlValues = [data.u_username, data.u_email, data.u_name, data.u_hashedPwd, data.u_signedUp];
+                    const hashedPwd = bcrypt.hashSync(data.u_hashedPwd, 10);
+                    const insertSqlValues = [data.u_username, data.u_email, data.u_name, hashedPwd, data.u_signedUp];
                     console.log(insertSqlValues);
                     conn.query(insertSql, insertSqlValues, (err, result, fields) => {
                         if(err){
