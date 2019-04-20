@@ -11,7 +11,9 @@ router.post('/', (req, res, next) => {
         }
         else if(!data.u_username || !data.u_email || !data.u_name || !data.u_hashedPwd){
             console.log("register fields empty");
-            return res.redirect(400, '/register?reg=empty');
+            return res.status(400).send({
+                err: 'You must fill in all the form fields'
+            })
         }
         else{
             conn.query('SELECT * FROM users WHERE u_email LIKE ?', data.u_email, (err, result, fields) => {
@@ -22,7 +24,9 @@ router.post('/', (req, res, next) => {
                     console.log("email already used for another user");
                     console.log(result);
                     conn.release();
-                    return res.redirect(400, '/register?reg=emailused');
+                    return res.status(400).json({
+                        err: 'Email already used for another account'
+                    })
                 }
                 else{
                     conn.query('SELECT * FROM users WHERE u_username LIKE ?', data.u_username, (err, result, fields) => {
@@ -33,7 +37,9 @@ router.post('/', (req, res, next) => {
                             console.log("user already exists");
                             console.log(result);
                             conn.release();
-                            return res.redirect(400, '/register?reg=userexists');
+                            return res.status(400).send({
+                                err: 'Username already exists'
+                            })
                         }
                         else{
                             const insertSql = "INSERT INTO users (u_username, u_email, u_name, u_hashedPwd, u_signedUp) VALUES (?, ?, ?, ?, ?)";
@@ -48,7 +54,9 @@ router.post('/', (req, res, next) => {
                                     //console.log(result);
                                     //console.log(fields);
                                     conn.release();
-                                    return res.redirect(201, '/register');
+                                    return res.status(201).send({
+                                        message: "User created Successfully"
+                                    })
                                 }
                             });
                         }

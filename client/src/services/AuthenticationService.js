@@ -5,9 +5,10 @@ export default {
         return Api().post('register', credentials)
         .then(response => {
             console.log(response.data);
+            return response;
         })
         .catch(e => {
-            console.log(e);
+            console.log(e + "error here");
         })
     }
 }

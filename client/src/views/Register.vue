@@ -6,13 +6,13 @@
                 <li v-for="error in errors" :key="error.id">{{error}}</li>
             </ul>
         </p>
-        <form class="register-form" @submit="checkForm" id="registerForm" novalidate="true">
+        <form class="register-form" id="registerForm" novalidate="true">
             <input type="text" name="username" v-model="username" placeholder="Username">
             <input type="email" name="email" v-model="email" placeholder="Email">
             <input type="text" name="name" v-model="name" placeholder="Name">
             <input type="password" name="password" v-model="password" placeholder="Password">
             <input type="password" name="password2" v-model="password2" placeholder="Confirm Password">
-            <input @click="register" type="submit" value="Register">
+            <input @click="checkForm" value="Register" id="register-btn">
         </form>
     </div>
     
@@ -37,17 +37,22 @@ export default {
         }
     },
     methods: {
-        register () {
+        async register () {
             let d = new Date();
             let dateString = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-            const response = AuthenticationService.register({
+            try{
+               await AuthenticationService.register({
                 u_username: this.username,
                 u_email: this.email,
                 u_name: this.name,
                 u_hashedPwd: this.password,
                 u_signedUp: dateString
-            });
-            //console.log(response.data);
+                });
+                
+            }catch(err){
+                console.log(err);
+            }
+            
         },
         checkForm(e) {
             this.errors = [];
@@ -66,12 +71,7 @@ export default {
             else{
                 e.preventDefault();
                 this.register();
-                this.errors.push('Registration Successful')
-                this.username = "";
-                this.email = "";
-                this.name = "";
-                this.password = "";
-                this.password2 = "";
+                
             }
             e.preventDefault();
             
@@ -99,5 +99,8 @@ export default {
         width: 100%;
         padding: 0;
         text-align: center;
+    }
+    #register-btn{
+        cursor: pointer;
     }
 </style>
