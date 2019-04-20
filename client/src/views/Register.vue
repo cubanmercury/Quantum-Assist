@@ -1,9 +1,14 @@
 <template>
     <div>
         <Register />
-        <p v-if="errors.length">
+        <p v-if="errors.length" class="error">
             <ul>
                 <li v-for="error in errors" :key="error.id">{{error}}</li>
+            </ul>
+        </p>
+        <p v-if="success.length" class="success">
+            <ul>
+                <li v-for="message in success" :key="message.id">{{message}}</li>
             </ul>
         </p>
         <form class="register-form" id="registerForm" novalidate="true">
@@ -33,25 +38,40 @@ export default {
             name: '',
             password: '',
             password2: '',
-            errors: []
+            errors: [],
+            success: []
         }
     },
     methods: {
         async register () {
+            this.success = [];
             let d = new Date();
             let dateString = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             try{
-               await AuthenticationService.register({
+               const response = await AuthenticationService.register({
                 u_username: this.username,
                 u_email: this.email,
                 u_name: this.name,
                 u_hashedPwd: this.password,
                 u_signedUp: dateString
                 });
-                
-            }catch(err){
-                console.log(err);
+                this.success.push(response);
+                this.username = "";
+                this.email = "";
+                this.name = "";
+                this.password = "";
+                this.password2 = "";
+            }catch(e){
+                if(e.response){
+                    this.errors.push(e.response.data.err);
+                    console.log(e.response.data.err);
+                    this.password = "";
+                    this.password2 = "";
+                }else{
+                    console.log(e); 
+                }
             }
+            
             
         },
         checkForm(e) {
@@ -102,5 +122,11 @@ export default {
     }
     #register-btn{
         cursor: pointer;
+    }
+    .error{
+        color: red;
+    }
+    .success{
+        color: green;
     }
 </style>
