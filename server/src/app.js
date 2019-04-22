@@ -27,21 +27,13 @@ app.use(session({
 
 //import routes
 const registerRouter = require('../routes/register');
+const loginRouter = require('../routes/login');
 
 //assigning paths to routes
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 
 app.listen(config.port);
-/*
-db.connect((err) => {
-    if(err){
-        console.log("DB Connection Failed \n" + err);
-    }
-    else{
-        app.listen(config.port);
-        console.log("DB Connection Successful");
-    }
-})
-*/
+
 module.exports = app;

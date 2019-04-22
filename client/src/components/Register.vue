@@ -18,9 +18,9 @@
 		<input type="text" name="name" v-model="name" placeholder="Name">
 		<input type="password" name="password" v-model="password" placeholder="Password">
 		<input type="password" name="password2" v-model="password2" placeholder="Confirm Password">
-		<input @click="checkForm" value="Register" id="register-btn">
+		<input type="button" @click="checkForm" value="Register" id="register-btn">
 	</form>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -69,8 +69,6 @@ export default {
                     console.log(e); 
                 }
             }
-            
-            
         },
         checkForm(e) {
             this.errors = [];
@@ -92,7 +90,6 @@ export default {
                 
             }
             e.preventDefault();
-            
         },
         validEmail(email){
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
