@@ -6,9 +6,12 @@ const morgan = require('morgan');
 const session = require('express-session');
 const db = require('../models/db.js');  //mysql database connection path
 const config = require('../src/config/config');
+const redis = require('redis');
+const client = redis.createClient();
+const redisStore = require('connect-redis')(session);
 
 const app = express();
-const routes = require('./routes')(app);
+
 
 //middleware
 app.use(morgan('tiny'));
@@ -20,10 +23,16 @@ app.use(cors());
 app.use(cookieParser());
 
 app.use(session({
-    secret: 'cactus snacks',
+    secret: 'cactusSnacks',
+    name: '_quantumAssist',
+    store: new redisStore({host: 'localhost', port: 6379, client: client, ttl: 260}),
     resave: false,
-    saveUninitialized: true
-}))
+    saveUninitialized: false
+}));
+
+client.on('error', (err) => {
+    console.log('Redis error: ', err);
+  });
 
 //import routes
 const registerRouter = require('../routes/register');

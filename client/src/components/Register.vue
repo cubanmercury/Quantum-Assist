@@ -12,14 +12,14 @@
 			<li v-for="message in success" :key="message.id">{{message}}</li>
 		</ul>
 	</p>
-	<form class="register-form" id="registerForm" novalidate="true">
-		<input type="text" name="username" v-model="username" placeholder="Username">
-		<input type="email" name="email" v-model="email" placeholder="Email">
-		<input type="text" name="name" v-model="name" placeholder="Name">
-		<input type="password" name="password" v-model="password" placeholder="Password">
-		<input type="password" name="password2" v-model="password2" placeholder="Confirm Password">
-		<input type="button" @click="checkForm" value="Register" id="register-btn">
-	</form>
+	<v-form class="register-form" id="registerForm" novalidate="true">
+		<v-text-field required :counter="15" type="text" name="username" v-model="username" placeholder="Username"></v-text-field>
+		<v-text-field type="email" name="email" v-model="email" placeholder="Email"></v-text-field>
+		<v-text-field type="text" name="name" v-model="name" placeholder="Name"></v-text-field>
+		<v-text-field type="password" name="password" v-model="password" placeholder="Password"></v-text-field>
+		<v-text-field type="password" name="password2" v-model="password2" placeholder="Confirm Password"></v-text-field>
+		<v-btn @click="checkForm" id="register-btn">Register</v-btn>
+	</v-form>
   </div>
 </template>
 
@@ -73,16 +73,16 @@ export default {
         checkForm(e) {
             this.errors = [];
             if(!this.username){
-                this.errors.push('username required');
+                this.errors.push('Username Required');
             }
             else if(!this.email){
-                this.errors.push('email required');
+                this.errors.push('Email Required');
             }
             else if(!this.validEmail(this.email)){
-                this.errors.push('please enter a valid email');
+                this.errors.push('Please enter a valid Email');
             }
             else if(this.password !== this.password2){
-                this.errors.push('passwords don\'t match');
+                this.errors.push('Passwords don\'t match');
             }
             else{
                 e.preventDefault();
@@ -110,7 +110,7 @@ export default {
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
-        width: 30%;
+        width: 70%;
         margin: 0 auto;
     }
     .register-form input{

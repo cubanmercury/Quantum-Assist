@@ -11,7 +11,7 @@ router.post('/', (req, res, next) => {
         }
         else if(!data.u_username || !data.u_email || !data.u_name || !data.u_hashedPwd){
             console.log("register fields empty");
-            return res.status(400).send({
+            return res.status(401).send({
                 err: 'You must fill in all the form fields'
             })
         }
@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
                     console.log("email already used for another user");
                     console.log(result);
                     conn.release();
-                    return res.status(400).json({
+                    return res.status(401).json({
                         err: 'Email already used for another account'
                     })
                 }
@@ -37,7 +37,7 @@ router.post('/', (req, res, next) => {
                             console.log("user already exists");
                             console.log(result);
                             conn.release();
-                            return res.status(400).send({
+                            return res.status(401).send({
                                 err: 'Username already exists'
                             })
                         }

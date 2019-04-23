@@ -11,11 +11,11 @@
                 <li v-for="message in success" :key="message.id">{{message}}</li>
             </ul>
         </p>
-        <form class="login-form" id="loginForm">
-            <input type="text" name="username" v-model="username" placeholder="Username">
-            <input type="password" name="password" v-model="password" placeholder="Password">
-            <input type="button" @click="checkForm" value="Login" id="login-btn">
-        </form>
+        <v-form class="login-form" id="loginForm">
+            <v-text-field :counter="15" required type="text" name="username" v-model="username" placeholder="Username"></v-text-field>
+            <v-text-field required type="password" name="password" v-model="password" placeholder="Password"></v-text-field>
+            <v-btn @click="checkForm" id="login-btn">Login</v-btn>
+        </v-form>
     </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
                     this.errors.push(e.response.data.err);
                     this.password = "";
                 }else{
-                    console.log(e); 
+                    console.log(e);
                 }
             }
         }
@@ -75,5 +75,23 @@ p.title{
 }
 #login-btn{
     cursor: pointer;
+}
+.error{
+    color: red;
+}
+.success{
+    color: green;
+}
+.login-form{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.login-form input{
+    width: 100%;
+    margin: 5px 0;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
 }
 </style> 
