@@ -2,8 +2,7 @@ html, body{
     padding: 0;
     margin: 0;
     background: rgb(236, 240, 241);
-
-    
+	font-family: 'Bai Jamjuree', sans-serif;
 }
 #app{
    min-height: 100%;
@@ -14,11 +13,10 @@ html, body{
 
 #footer{
     width: 100%;
-    height: 250px;
-    background-color: #111;
+    height: 200px;
+    background-color: #333333;
     color: #fff;
-
-    position: fixed;
+	position: fixed;
     z-index: -1;
     left: 0;
     right: 0;
@@ -34,10 +32,54 @@ html, body{
 	margin: 0 auto 0 auto;
     overflow: hidden;
 }
-
+#wrap .container-fluid{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	height: 100%;
+}
+.footer-top{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+.copyright p{
+	margin: 0 0 0 5px;
+	padding: 0;
+}
+.quote{
+	display:  flex;
+	flex-flow: column nowrap;
+}
+.subheading{
+	margin: 10px 5px;
+}
+.github{
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	max-height: 100px;
+}
+.github .forkme{
+	z-index: 1;
+}
+.github-logo-cont{
+	z-index: -1;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	width: 0;
+}
+.github .github-logo{
+	width: 4rem;
+	z-index: -1;
+	margin-right: -35px;
+	margin-left: 15px;
+	height: 75px;
+}
 #lightings
 {
-	bottom: -50px;
+	bottom: -75px;
 	position: absolute;
 	width: 100%;
 }

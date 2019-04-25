@@ -1,16 +1,16 @@
 <template>
     <div class="login">
         <p class="title">Welcome back</p>
-        <p v-if="errors.length" class="error">
+        <v-alert :value="true" color="error" icon="new_releases" v-if="errors.length">
             <ul>
                 <li v-for="error in errors" :key="error.id">{{error}}</li>
             </ul>
-        </p>
-        <p v-else-if="success.length" class="success">
+        </v-alert>
+        <v-alert :value="true" type="success" v-else-if="success.length">
             <ul>
                 <li v-for="message in success" :key="message.id">{{message}}</li>
             </ul>
-        </p>
+        </v-alert>
         <v-form class="login-form" id="loginForm">
             <v-text-field :counter="15" required type="text" name="username" v-model="username" placeholder="Username"></v-text-field>
             <v-text-field required type="password" name="password" v-model="password" placeholder="Password"></v-text-field>
