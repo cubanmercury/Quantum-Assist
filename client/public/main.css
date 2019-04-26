@@ -71,11 +71,11 @@ html, body{
 	width: 0;
 }
 .github .github-logo{
-	width: 4rem;
+	width: 64px;
+	height: 64px;
 	z-index: -1;
 	margin-right: -35px;
-	margin-left: 15px;
-	height: 75px;
+	margin-left: 10px;
 }
 #lightings
 {
