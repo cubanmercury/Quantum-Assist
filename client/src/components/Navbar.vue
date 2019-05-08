@@ -6,10 +6,10 @@
                     <v-list class="pa-0">
                     <v-list-tile avatar>
                         <v-list-tile-avatar router-link to="/">
-                        <img height="20px" src="../assets/logo.png">
+                            <img height="20px" src="../assets/logo.png">
                         </v-list-tile-avatar>
                         <v-list-tile-content router-link to="/">
-                        <v-list-tile-title>Quantum Assist</v-list-tile-title>
+                            <v-list-tile-title>Quantum Assist</v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action>
                         <v-btn icon @click.stop="mini = !mini">
@@ -39,11 +39,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
+    computed: {
+        ...mapState([
+        'mini'
+        ])
+    },
     data() {
         return {
         drawer: true,
-        mini: true,
+        mini: {mini},
         navbar: [
             {title: 'Periodic Table', icon: 'dashboard', route:'/'},
             {title: 'About', icon: 'info', route: '/about'},

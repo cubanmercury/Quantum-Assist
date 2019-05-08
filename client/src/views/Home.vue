@@ -4,6 +4,9 @@
         <div class="home">
           <img alt="Vue logo" src="../assets/logo.png">
           <HelloWorld msg="Welcome to Quantum Assist"/>
+          <p>{{ mini }}</p>
+          <p>{{count}}</p>
+          <button @click='increment'>+</button>
         </div>
       </v-layout>
 </v-container>
@@ -12,12 +15,22 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue';
-
+import {mapState, mapMutations} from 'vuex';
 export default {
   name: 'home',
   components: {
     HelloWorld
-  }
+  },
+  computed: {
+    ...mapState([
+      'mini', 
+      'count'
+    ])
+  },
+  methods: mapMutations([
+    'increment',
+    'toggle'
+  ])
 }
 </script>
 
