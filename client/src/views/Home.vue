@@ -5,8 +5,6 @@
           <img alt="Vue logo" src="../assets/logo.png">
           <HelloWorld msg="Welcome to Quantum Assist"/>
           <p>{{ mini }}</p>
-          <p>{{count}}</p>
-          <button @click='increment'>+</button>
         </div>
       </v-layout>
 </v-container>
@@ -23,12 +21,10 @@ export default {
   },
   computed: {
     ...mapState([
-      'mini', 
-      'count'
+      'mini'
     ])
   },
   methods: mapMutations([
-    'increment',
     'toggle'
   ])
 }

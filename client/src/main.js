@@ -10,20 +10,22 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    mini: true,
-    count: 0
+    mini: true
   },
   mutations: {
-    toggle (state) {
+    closeMini (state) {
       if (state.mini == true){
         return;
-      }
-      else{
+      }else{
         state.mini = !state.mini;
       }
     },
-    increment (state){
-      state.count++
+    openMini(state){
+      if(state.mini == true){
+        state.mini = !state.mini;
+      }else{
+        return;
+      }
     }
   }
 });
@@ -36,17 +38,15 @@ Vue.use(Vuetify, {
 Vue.config.productionTip = false
 
 new Vue({
+  el: '#app',
   router,
-  store: store,
-  computed: mapState({
-    mini: state => state.mini
-  }),
+  store,
+  computed: mapState([
+    'mini'
+  ]),
   methods: mapMutations([
-    'toggle',
-    'increment'
+    'openMini',
+    'closeMini'
   ]),
   render: h => h(App)
 }).$mount('#app')
-
-store.commit('toggle');
-console.log(store.state.mini);

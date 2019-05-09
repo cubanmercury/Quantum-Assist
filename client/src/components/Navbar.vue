@@ -1,5 +1,5 @@
 <template>
-    <div id="navbar">
+    <div id="navbar"  @click="openMini">
         <v-app id="inspire">
             <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
                 <v-toolbar flat class="transparent">
@@ -39,25 +39,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations } from 'vuex';
 export default {
-    computed: {
-        ...mapState([
-        'mini'
-        ])
-    },
     data() {
         return {
-        drawer: true,
-        mini: {mini},
-        navbar: [
-            {title: 'Periodic Table', icon: 'dashboard', route:'/'},
-            {title: 'About', icon: 'info', route: '/about'},
-            {title: 'Account', icon: 'account_circle', route: '/register'}
-        ],
-        right: null
+            drawer: 1,
+            mini: this.$store.state.mini,
+            navbar: [
+                {title: 'Periodic Table', icon: 'dashboard', route:'/'},
+                {title: 'About', icon: 'info', route: '/about'},
+                {title: 'Account', icon: 'account_circle', route: '/register'}
+            ],
+            right: null
         }
-    }
+    },
+    methods: mapMutations([
+    'openMini',
+    'closeMini'
+  ])
 }
 </script>
 

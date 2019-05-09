@@ -10,19 +10,19 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
     "express": "^4.16.4",
     "vue": "^2.6.6",
-    "vue-router": "^3.0.1",
-    "vuetify": "^1.5.13",
-    "vuex": "^3.1.0"
+    "vue-router": "^3.0.6",
+    "vuetify": "^1.5.14",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
@@ -37,7 +37,8 @@
     "rules": {
       "no-console": 0,
       "no-unused-vars": 0,
-      "no-useless-escape": 0
+      "no-useless-escape": 0,
+      "no-undef": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"

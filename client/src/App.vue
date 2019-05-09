@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
-    <div class="app-inner" @click="toggle">
+    <Navbar/>
+    <div class="app-inner" @click="closeMini">
       <router-view/>
     </div>
   </div>
@@ -20,7 +20,8 @@ export default {
     ])
   },
   methods: mapMutations([
-    'toggle'
+    'openMini',
+    'closeMini'
   ])
 }
 </script>
