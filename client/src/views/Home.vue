@@ -4,7 +4,7 @@
         <div class="home">
           <img alt="Vue logo" src="../assets/logo.png">
           <HelloWorld msg="Welcome to Quantum Assist"/>
-          <p>{{ mini }}</p>
+          <p>{{ this.$store.state.mini }}</p>
         </div>
       </v-layout>
 </v-container>

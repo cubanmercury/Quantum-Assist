@@ -27,6 +27,11 @@ const store = new Vuex.Store({
         return;
       }
     }
+  },
+  actions: {
+    openMini (context){
+      context.commit('openMini')
+    }
   }
 });
 

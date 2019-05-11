@@ -1,5 +1,5 @@
 <template>
-    <div id="navbar"  @click="openMini">
+    <div id="navbar">
         <v-app id="inspire">
             <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" hide-overlay stateless>
                 <v-toolbar flat class="transparent">
