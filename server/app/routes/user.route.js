@@ -1,21 +1,24 @@
-module.exports = function(app){
-    const users = require('../controller/user.controller.js');
+const express = require('express');
+const router = express.Router();
 
-    //create new user
-    app.post('/', users.create);
+const users = require('../controller/user.controller.js');
 
-    //retrieve all users
-    app.get('/', users.findAll);
+//create new user
+router.post('/', users.create);
 
-    //retrieve user by id
-    app.get('/:userId', users.findById);
+//retrieve all users
+router.get('/', users.findAll);
 
-    //retrieve user by username
-    app.get('/:userUsername', users.findByUsername);
+//retrieve user by id
+router.get('/:userId', users.findById);
 
-    //update user with id
-    app.put('/:userId', users.update);
+//retrieve user by username
+router.get('/:userUsername', users.findByUsername);
 
-    //delete user with id
-    app.delete('/:userId', users.delete);
-}
+//update user with id
+router.put('/:userId', users.update);
+
+//delete user with id
+router.delete('/:userId', users.delete);
+
+module.exports = router;

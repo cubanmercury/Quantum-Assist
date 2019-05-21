@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const User = db.users;
+const bcrypt = require('bcryptjs');
 
 //post a user
 exports.create = (req, res) => {
@@ -8,8 +9,9 @@ exports.create = (req, res) => {
         u_username: req.body.u_username,
         u_email: req.body.u_email,
         u_name: req.body.u_name,
+        u_name: req.body.u_name,
         u_hashedPwd: hashedPwd,
-        u_signedUp: req.body.u_signedUp
+        u_signedUp: new Date()
     }).then(user => {
         res.send(user);
     }).catch(err => {
