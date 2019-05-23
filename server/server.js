@@ -38,8 +38,8 @@ client.on('error', (err) => {
 
 const db = require('./app/config/db.config.js');
 //force: false => will not drop table if it already exists
-db.sequelize.sync({force: false}).then(() => {
-    console.log('Drop and Resync with {force: false}');
+db.sync({force: false}).then(() => {
+    console.log('Resync with {force: false}');
 });
 
 const userAuth = require('./app/config/user.auth.js')(passport);

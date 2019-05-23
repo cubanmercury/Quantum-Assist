@@ -4,7 +4,8 @@ const passport = require('passport');
 
 //find user
 router.get('/', passport.authenticate('localLogin', {
-    successRedirect: '/user'
+    successRedirect: '/user',
+    failureRedirect: '/login'
 }));
 
 module.exports = router;
