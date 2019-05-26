@@ -1,48 +1,119 @@
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.model.js');
 const bcrypt = require('bcryptjs');
 
 module.exports = (passport) => {
     passport.serializeUser((user, next) => {
-        next(null, user.id)
+        next(null, JSON.stringify(user));
     });
 
-    passport.deserializeUser((id, next) => {
-        User.findById(id, (err, user) => {
-            next(err, user)
-        })
+    passport.deserializeUser((packet, next) => {
+        next(null, JSON.parse(packet));
     });
+
+    //---------------------------------------------------LOGIN FLOW
 
     const localLogin = new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
-    }, (req, email, password, next) => {
-        User.findOne({username: email}, (err, user) => {
-            if(err){
-                return next(err);
+    }, ( req, email, password, done) => {
+        if(email){
+            console.log(email);
+        }
+        if(password){
+            console.log(password);
+        }
+        // if(!req.email || !req.password){
+        //     return done(null, {
+        //         message: "Form fields are empty"
+        //     })
+        // }
+        User.findOne({
+            where: {
+                u_email: email
             }
-            if(user == null){
-                return next(new Error("User not found"));
+        }).then((user) => {
+            if(!user){
+                return done(null, {
+                    message: "User not found"
+                })
             }
-            if(bcrypt.compareSync(password, user.u_hashedPwd) == false){
-                return next(new Error('Incorrect Password'));
+            // else if(bcrypt.compareSync(password, user.u_hashedPwd) == false){
+            //     return done(null, {
+            //         message: "Incorrect Password"
+            //     })
+            // }
+            else{
+                return done(null, user);
             }
+        }).catch((err) => {
+            console.log("Error: " + err);
+            return done(null, {
+                message: "Error occurred"
+            })
+        })
+            
         
-            return next(null, user);
-        });
+
+
+        // User.findOne({u_email: email}, (err, user) => {
+        //     if(err){
+        //         return next(err);
+        //     }
+        //     if(user == null){
+        //         return next(new Error("User not found"));
+        //     }
+        //     if(bcrypt.compareSync(password, user.u_hashedPwd) == false){
+        //         return next(new Error('Incorrect Password'));
+        //     }
+        
+        //     return next(null, user);
+        // });
     });
     
     passport.use('localLogin', localLogin);
+    
+//---------------------------------------------------REGISTER FLOW
+
+    // passport.use(new LocalStrategy(
+    //     (email, password, next) => {
+    //         User.findOne({email: email}, (err, user) => {
+    //             if(err){
+    //                 return next(err);
+    //             }
+    //             if(!user){
+    //                 return next(new Error("User not found"));
+    //             }
+    //             if(bcrypt.compareSync(password, user.u_hashedPwd) == false){
+    //                 return next(new Error('Incorrect Password'));
+    //             }
+    //             return next(null, user);
+    //         })
+    //     })
+    // )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const localRegister = new LocalStrategy({
-        emailField: 'email',
+        usernameField: 'email',
         nameField: 'name',
         passwordField: 'password',
         dateField: new Date(),
         passReqToCallback: true
-    }, (req, username, email, password, date, next) => {
+    }, (email, password, date, next) => {
         User.findOne({u_email: email}, (err, user) => {
             if(err){
                 return next(err);

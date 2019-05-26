@@ -14,7 +14,8 @@ const corsOptions = {
 }
 const app = express();
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 //middleware
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
@@ -27,11 +28,12 @@ app.use(session({
     secret: 'cactusSnacks',
     name: '_quantumAssist',
     store: new redisStore({host: 'localhost', port: 6379, client: client, ttl: 260}),
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+
+require('./app/config/user.auth.js')(passport);
+
 client.on('error', (err) => {
     console.log('Redis error: ', err);
 });
@@ -39,10 +41,11 @@ client.on('error', (err) => {
 const db = require('./app/config/db.config.js');
 //force: false => will not drop table if it already exists
 db.sync({force: false}).then(() => {
-    console.log('Resync with {force: false}');
+    console.log('Database sync successful');
+}).catch((err) => {
+    console.log("Database sync failed: " + err);
 });
 
-const userAuth = require('./app/config/user.auth.js')(passport);
 //import routes
 const registerRouter = require('./app/routes/register.route.js');
 const loginRouter = require('./app/routes/login.route.js');
