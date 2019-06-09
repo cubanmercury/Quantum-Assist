@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-    <div class="app-inner" @click="closeMini">
+    <div class="app-inner" @click="toggleMini">
       <router-view/>
     </div>
   </div>
@@ -9,7 +9,8 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
-import { mapMutations, mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
+
 export default {
   components:{
     Navbar
@@ -19,10 +20,16 @@ export default {
       'mini'
     ])
   },
-  methods: mapMutations([
-    'openMini',
-    'closeMini'
-  ])
+  methods: {
+    ...mapMutations([
+      'TOGGLE_MINI'
+    ]),
+    toggleMini: function(){
+      if(this.mini == false){
+        this.TOGGLE_MINI()
+      }
+    }
+  }
 }
 </script>
 

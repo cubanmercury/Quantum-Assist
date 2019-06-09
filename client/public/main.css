@@ -63,20 +63,6 @@ html, body{
 .github .forkme{
 	z-index: 1;
 }
-.github-logo-cont{
-	z-index: -1;
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: flex-end;
-	width: 0;
-}
-.github .github-logo{
-	width: 64px;
-	height: 64px;
-	z-index: -1;
-	margin-right: -35px;
-	margin-left: 10px;
-}
 #lightings
 {
 	bottom: -75px;

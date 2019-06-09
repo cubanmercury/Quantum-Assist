@@ -4,7 +4,6 @@
         <div class="home">
           <img alt="Vue logo" src="../assets/logo.png">
           <HelloWorld msg="Welcome to Quantum Assist"/>
-          <p>{{ this.$store.state.mini }}</p>
         </div>
       </v-layout>
 </v-container>
@@ -12,21 +11,12 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-import {mapState, mapMutations} from 'vuex';
+import HelloWorld from '@/components/Home/HelloWorld.vue';
 export default {
   name: 'home',
   components: {
     HelloWorld
-  },
-  computed: {
-    ...mapState([
-      'mini'
-    ])
-  },
-  methods: mapMutations([
-    'toggle'
-  ])
+  }
 }
 </script>
 
