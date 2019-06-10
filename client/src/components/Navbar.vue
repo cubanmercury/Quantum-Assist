@@ -11,11 +11,6 @@
                         <v-list-tile-content router-link to="/">
                             <v-list-tile-title>Quantum Assist</v-list-tile-title>
                         </v-list-tile-content>
-                        <v-list-tile-action>
-                        <v-btn icon @click="toggleMini">
-                            <v-icon>chevron_left</v-icon>
-                        </v-btn>
-                        </v-list-tile-action>
                     </v-list-tile>
                     </v-list>
                 </v-toolbar>
@@ -56,7 +51,7 @@ export default {
             navbar: [
                 {title: 'Periodic Table', icon: 'dashboard', route:'/'},
                 {title: 'About', icon: 'info', route: '/about'},
-                {title: 'Account', icon: 'account_circle', route: '/register'}
+                {title: 'Account', icon: 'account_circle', route: '/account'}
             ],
             right: null
         }
