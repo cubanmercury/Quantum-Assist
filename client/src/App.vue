@@ -36,7 +36,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Bai Jamjuree', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -47,5 +47,9 @@ export default {
 }
 .app-inner{
   width: 100%;
+}
+.container{
+  padding: 0 !important;
+  margin: 0 !important;
 }
 </style>

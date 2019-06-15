@@ -84,17 +84,20 @@
 
       </v-window>
     </v-flex>
+    <Account />
   </v-layout>
 </template>
 
 <script>
 import Register from '@/components/Account/subComponents/Register.vue';
 import Login from '@/components/Account/subComponents/Login.vue';
+import Account from '@/components/Account/Account.vue';
 export default {
     name: 'account',
     components: {
         Register,
-        Login
+        Login,
+        Account
     },
     data: () => ({
         length: 2,
