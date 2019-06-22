@@ -1,47 +1,27 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>Built with Vue.js and Express.js</p>
-    
-    <div class="button_frame">
-      <Button title="Explore" path="/pt"/>
-      <Button title="Register" path="/account"/>
-    </div>
-  </div>
+    <!-- <div class="button_frame"> -->
+        <router-link class="button" :to="path">
+            <span>{{ title }}</span>
+            <svg class="svg">
+                <polyline class="o1" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
+                <polyline class="o2" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
+            </svg>
+        </router-link>
+    <!-- </div> -->
 </template>
  
 <script>
-import Button from '@/components/Button.vue';
 export default {
-  name: 'HelloWorld',
-  components: {
-    Button
-  },
+  name: 'Button',
   props: {
-    msg: String
+    title: String,
+    path: String
   }
 }
 </script>
 
+
 <style scoped>
-*{
-  color: #ffffff;
-}
-h1 {
-  margin: 15px 0 0;
-  font-size: 2.7rem;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 
 .button_frame{
   display: flex;
