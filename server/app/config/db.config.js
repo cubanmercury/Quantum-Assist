@@ -14,12 +14,13 @@ const sequelize = new Sequelize(env.database, env.username, env.password, {
     }
 });
 
-// const db = {};
+const db = {};
 
-// db.Sequelize = Sequelize;
-// db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
 
-// //models/tables
-// db.users = require('../models/user.model.js')(sequelize, Sequelize);
+//models
+db.elements = require('../models/pt.model.js')(sequelize, Sequelize);
+db.users = require('../models/user.model.js')(sequelize, Sequelize);
 
-module.exports = sequelize;
+module.exports = db;

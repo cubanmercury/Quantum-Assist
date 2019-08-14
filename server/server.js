@@ -38,23 +38,28 @@ client.on('error', (err) => {
     console.log('Redis error: ', err);
 });
 
-const db = require('./app/config/db.config.js');
+const db = require('./app/config/db.config'),
+    sequelize = db.sequelize,
+    Sequelize = db.Sequelize;
 //force: false => will not drop table if it already exists
-db.sync({force: false}).then(() => {
-    console.log('Database sync successful');
-}).catch((err) => {
-    console.log("Database sync failed: " + err);
+sequelize.sync({force: false})
+    .then(() => {
+        console.log('Database sync successful');
+    }).catch((err) => {
+        console.log("Database sync failed: " + err);
 });
 
 //import routes
 const registerRouter = require('./app/routes/register.route.js');
 const loginRouter = require('./app/routes/login.route.js');
 const userRouter = require('./app/routes/user.route.js');
+const ptRouter = require('./app/routes/pt.route.js');
 
 //assigning paths to routes
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/user', userRouter);
+app.use('/pt', ptRouter);
 
 var server = app.listen(8081, "127.0.0.1", function(){
     var host = server.address().address;
