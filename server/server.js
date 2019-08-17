@@ -9,7 +9,7 @@ const redisStore = require('connect-redis')(session);
 const passport = require('passport');
 const cors = require('cors');
 const corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: 'http://localhost:8080',
     optionsSuccessStatus: 200
 }
 const app = express();

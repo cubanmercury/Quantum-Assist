@@ -1,46 +1,50 @@
 <template>
-    <v-form v-model="valid">
-        <v-layout>
-            <v-flex xs12 md4>
-                <v-text-field dark v-model="search" label="Search" required></v-text-field>
-            </v-flex>
+    <div id="periodic-table-container">
+        <v-form>
+            <v-layout>
+                <v-flex xs12 md4>
+                    <v-text-field dark v-model="search" label="Search" required></v-text-field>
+                </v-flex>
 
-            <v-flex xs12 md4 >
-                <v-select :items="valenceItems" label="Valence Electrons" dark></v-select>
-            </v-flex>
+                <v-flex xs12 md4 >
+                    <v-select :items="valenceItems" label="Valence Electrons" dark></v-select>
+                </v-flex>
 
-            <v-flex xs12 sm6 lg1 d-flex>
-                <v-select :items="blockItems" label="Block" dark></v-select>
-            </v-flex>
+                <v-flex xs12 sm6 lg1 d-flex>
+                    <v-select :items="blockItems" label="Block" dark></v-select>
+                </v-flex>
 
-            <Button title="Search" path="#"/>
+                <Button title="Search" path="#"/>
 
-            <v-menu bottom left>
-                <template v-slot:activator="{on}">
-                    <v-btn icon dark v-on="on">
-                        <v-icon>more_vert</v-icon>
-                    </v-btn>
-                </template>
-                
-                <v-list>
-                    <v-list-tile v-for="(item, i) in menuItems" :key="i" @click="">
-                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-            </v-menu>
+                <v-menu bottom left>
+                    <template v-slot:activator="{on}">
+                        <v-btn icon dark v-on="on">
+                            <v-icon>more_vert</v-icon>
+                        </v-btn>
+                    </template>
+                    
+                    <v-list>
+                        <v-list-tile v-for="(item, i) in menuItems" :key="i">
+                            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-menu>
 
+            </v-layout>
+        </v-form>
 
-
-        </v-layout>
-    </v-form>
+        <ElementCard />
+    </div>
 </template>
 
 <script>
 import Button from '@/components/Button.vue';
+import ElementCard from '@/components/Pt/element.vue';
 
 export default {
     components: {
-        Button
+        Button,
+        ElementCard
     },
     data: () => ({
         blockItems: ['S', 'P', 'D', 'F'],
