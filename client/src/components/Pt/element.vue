@@ -1,12 +1,9 @@
 <template>
     <div class="container d-flex align-center" style="flex-direction: column;">
-        <div class="render-elements md2">
-            <v-btn depressed small color="primary" @click="retrieveElements">get elements</v-btn>
-        </div>
         
         <v-container class="element-card-container d-flex">
             <div class="pt-row row-1 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowOneElements" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(0, 2)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -18,31 +15,59 @@
                 </v-container>
             </div>
             <div class="pt-row row-2 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowTwoElements" :key="index">
-                    <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
-                            <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
-                        </p>
-                        <p class="symbol">{{element.symbol}} </p>
-                        <p class="mass-number">{{element.mass_number}}</p>
-                        <p class="name">{{element.name}}</p>
-                    </v-card>
-                </v-container>
+                <div class="row-2-inner-start d-flex">
+                    <v-container class="element-card" v-for="(element, index) in rowElements(3, 4)" :key="index">
+                        <v-card  class="mx-auto card-content" :raised="raised">
+                            <p class="atomic-number">{{element.atomic_number}}
+                                <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                            </p>
+                            <p class="symbol">{{element.symbol}} </p>
+                            <p class="mass-number">{{element.mass_number}}</p>
+                            <p class="name">{{element.name}}</p>
+                        </v-card>
+                    </v-container>
+                </div>
+                <div class="row-2-inner-end d-flex">
+                    <v-container class="element-card" v-for="(element, index) in rowElements(5, 10)" :key="index">
+                        <v-card  class="mx-auto card-content" :raised="raised">
+                            <p class="atomic-number">{{element.atomic_number}}
+                                <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                            </p>
+                            <p class="symbol">{{element.symbol}} </p>
+                            <p class="mass-number">{{element.mass_number}}</p>
+                            <p class="name">{{element.name}}</p>
+                        </v-card>
+                    </v-container>
+                </div>
             </div>
             <div class="pt-row row-3 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowThreeElements" :key="index">
-                    <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
-                            <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
-                        </p>
-                        <p class="symbol">{{element.symbol}} </p>
-                        <p class="mass-number">{{element.mass_number}}</p>
-                        <p class="name">{{element.name}}</p>
-                    </v-card>
-                </v-container>
+                <div class="row-3-inner-start d-flex">
+                    <v-container class="element-card" v-for="(element, index) in rowElements(11, 12)" :key="index">
+                        <v-card  class="mx-auto card-content" :raised="raised">
+                            <p class="atomic-number">{{element.atomic_number}}
+                                <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                            </p>
+                            <p class="symbol">{{element.symbol}} </p>
+                            <p class="mass-number">{{element.mass_number}}</p>
+                            <p class="name">{{element.name}}</p>
+                        </v-card>
+                    </v-container>
+                </div>
+                <div class="row-3-inner-end d-flex">
+                    <v-container class="element-card" v-for="(element, index) in rowElements(13, 18)" :key="index">
+                        <v-card  class="mx-auto card-content" :raised="raised">
+                            <p class="atomic-number">{{element.atomic_number}}
+                                <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                            </p>
+                            <p class="symbol">{{element.symbol}} </p>
+                            <p class="mass-number">{{element.mass_number}}</p>
+                            <p class="name">{{element.name}}</p>
+                        </v-card>
+                    </v-container>
+                </div>
             </div>
             <div class="pt-row row-4 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowFourElements" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(19, 36)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -54,7 +79,7 @@
                 </v-container>
             </div>
             <div class="pt-row row-5 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowFiveElements" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(37, 54)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -66,7 +91,7 @@
                 </v-container>
             </div>
             <div class="pt-row row-6 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowSixElementsPartOne" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(55, 57)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -76,7 +101,7 @@
                         <p class="name">{{element.name}}</p>
                     </v-card>
                 </v-container>
-                <v-container class="element-card" v-for="(element, index) in rowSixElementsPartTwo" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(72, 86)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -88,7 +113,7 @@
                 </v-container>
             </div>
             <div class="pt-row row-7 d-flex">
-                <v-container class="element-card" v-for="(element, index) in rowSevenElementsPartOne" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(87, 89)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -98,7 +123,7 @@
                         <p class="name">{{element.name}}</p>
                     </v-card>
                 </v-container>
-                <v-container class="element-card" v-for="(element, index) in rowSevenElementsPartTwo" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(104, 118)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -111,7 +136,7 @@
             </div>
             <div class="pt-row row-lanthanide d-flex">
                 <p>Lanthanide Series</p>
-                <v-container class="element-card" v-for="(element, index) in rowLanthanide" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(58, 71)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -124,11 +149,10 @@
             </div>
             <div class="pt-row row-actinide d-flex">
                 <p>Actinide Series</p>
-                <v-container class="element-card" v-for="(element, index) in rowActinide" :key="index">
+                <v-container class="element-card" v-for="(element, index) in rowElements(90, 103)" :key="index">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
-                            <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
-                        </p>
+                        <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                        <p class="atomic-number">{{element.atomic_number}}</p>
                         <p class="symbol">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
@@ -160,107 +184,72 @@ export default {
             }).catch(e => {
                 console.log("The error sits here" + e);
             })
+        },
+        rowElements(min, max) {     //method for getting elements per row (min = 1st atomic number, max = last atomic number)
+            return this.elements.filter(function(element) {
+                return element.atomic_number >= min && element.atomic_number <= max;
+            })
         }
     },
-    computed: {
-        rowOneElements: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number <= 2;
-            })
-        },
-        rowTwoElements: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 2 && element.atomic_number <= 10;
-            })
-        },
-        rowThreeElements: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 10 && element.atomic_number <= 18;
-            })
-        },
-        rowFourElements: function(){
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 18 && element.atomic_number <= 36;
-            })
-        },
-        rowFiveElements: function(){
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 36 && element.atomic_number <= 54;
-            })
-        },
-        rowSixElementsPartOne: function(){
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 54 && element.atomic_number <= 57;
-            })
-        },
-        rowSixElementsPartTwo: function(){
-            return this.elements.filter(function(element) {
-                return element.atomic_number >= 72 && element.atomic_number <= 86;
-            })
-        },
-        rowSevenElementsPartOne: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number > 86 && element.atomic_number <= 89;
-            })
-        },
-        rowSevenElementsPartTwo: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number >= 104 && element.atomic_number <= 118;
-            })
-        },
-        rowLanthanide: function(){
-            return this.elements.filter(function(element) {
-                return element.atomic_number >= 58 && element.atomic_number <= 71;
-            })
-        },
-        rowActinide: function() {
-            return this.elements.filter(function(element) {
-                return element.atomic_number >=90 && element.atomic_number <= 103;
-            })
-        }
+    beforeMount() {
+        this.retrieveElements();
     }
 }
 </script>
 
 <style scoped>
-    p{
-        margin: 0;
-        padding: 0;
-    }
-    .container{
-        max-width: 100%;
-    }
-    .symbol{
-        margin: 10px 0;
-    }
-    .e-config{
-        font-size: 12px;
-    }
-    .pt-row{
-        width: 100%;
-        justify-content: space-between;
-    }
-    .row-1{
-        justify-content: space-between;
-    }
-    .row-lanthanide > p,
-    .row-actinide > p{
-        max-width: 175px;
-    }
-    .element-card-container{
-        flex-flow: column nowrap;
-        max-width: 1750px;
-        width: 100%;
-        justify-content: center;
-    }
-    .element-card{
-        max-width: 90px;
-    }
-    .element-card .card-content{
-        font-size: 14px;
-        padding: 5px;
-    }
-    .radioactive{
-        width: 15px;
-    }
+p{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    max-width: 100%;
+}
+.symbol{
+    margin: 3px 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+.name{
+    font-size: 12px;
+}
+.e-config{
+    font-size: 12px;
+}
+.pt-row{
+    width: 100%;
+    justify-content: space-between;
+}
+.row-2-inner-start,
+.row-3-inner-start{
+    justify-content: flex-start
+}
+.row-2-inner-end,
+.row-3-inner-end{
+    justify-content: flex-end;
+}
+.row-lanthanide > p,
+.row-actinide > p{
+    max-width: 175px;
+}
+.element-card-container{
+    flex-flow: column nowrap;
+    max-width: 1750px;
+    width: 100%;
+    justify-content: center;
+}
+.element-card{
+    max-width: 90px;
+    margin: 3px !important;
+    border-radius: 5px;
+}
+.element-card .card-content{
+    font-size: 14px;
+    padding: 5px;
+}
+.radioactive{
+    width: 15px;
+    position: absolute;
+    right: 5px;
+}   
 </style>

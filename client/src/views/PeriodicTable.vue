@@ -2,23 +2,23 @@
     <div id="periodic-table-container">
         <v-form>
             <v-layout>
-                <v-flex xs12 md4>
-                    <v-text-field dark v-model="search" label="Search" required></v-text-field>
+                <v-flex xs12 md4 class="input-container">
+                    <v-text-field v-model="search" label="Search" required color="#ffa114"></v-text-field>
                 </v-flex>
 
-                <v-flex xs12 md4 >
-                    <v-select :items="valenceItems" label="Valence Electrons" dark></v-select>
+                <v-flex xs12 md4 class="input-container">
+                    <v-select :items="valenceItems" label="Valence Electrons" color="#ffa114" ></v-select>
                 </v-flex>
 
-                <v-flex xs12 sm6 lg1 d-flex>
-                    <v-select :items="blockItems" label="Block" dark></v-select>
+                <v-flex xs12 sm6 lg1 d-flex class="input-container">
+                    <v-select :items="blockItems" label="Block" color="#ffa114"></v-select>
                 </v-flex>
 
                 <Button title="Search" path="#"/>
 
                 <v-menu bottom left>
                     <template v-slot:activator="{on}">
-                        <v-btn icon dark v-on="on">
+                        <v-btn icon v-on="on">
                             <v-icon>more_vert</v-icon>
                         </v-btn>
                     </template>
@@ -62,12 +62,19 @@ export default {
     .layout{
         justify-content: space-between;
         align-items: center;
-        margin: 0.8rem 1rem;
-        padding: 5px 15px;
-        background-color: #424242;
-        border-radius: 10px;
+        margin: 10px 10px 0 10px;
     }
     .button{
         margin: 0;
+    }
+    .v-text-field{
+        margin: 0;
+        padding: 0;
+    }
+    .v-input__slot{
+        margin: 0;
+    }
+    .input-container{
+        height: 40px;
     }
 </style>
