@@ -2,11 +2,15 @@
     <div id="periodic-table-container">
         <v-form>
             <v-layout>
-                <v-flex xs12 md4 class="input-container">
-                    <v-text-field v-model="search" label="Search" required color="#ffa114"></v-text-field>
+                <v-flex xs12 md2 class="input-container">
+                    <v-text-field v-model="search" label="Search" color="#ffa114"></v-text-field>
                 </v-flex>
 
-                <v-flex xs12 md4 class="input-container">
+                <v-flex xs12 md1 class="input-container">
+                    <v-text-field v-model="search" label="Symbol" color="#ffa114"></v-text-field>
+                </v-flex>
+                
+                <v-flex xs12 md1 class="input-container">
                     <v-select :items="valenceItems" label="Valence Electrons" color="#ffa114" ></v-select>
                 </v-flex>
 
