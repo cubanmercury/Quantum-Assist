@@ -1,8 +1,9 @@
 <template>
     <div class="container d-flex align-center" style="flex-direction: column;">
+    <ptKey />
         <v-container class="element-card-container">
            
-                <v-container class="element-card row-1" v-for="(element, index) in rowElements(1, 2)" :key="index">
+                <v-container class="element-card row-1" v-for="(element) in rowElements(1, 2)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -13,7 +14,7 @@
                     </v-card>
                 </v-container>
 
-                <v-container class="element-card row-2" v-for="(element, index) in rowElements(3, 10)" :key="index">
+                <v-container class="element-card row-2" v-for="(element) in rowElements(3, 10)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -24,7 +25,7 @@
                     </v-card>
                 </v-container>
 
-                <v-container class="element-card row-3" v-for="(element, index) in rowElements(11, 18)" :key="index">
+                <v-container class="element-card row-3" v-for="(element) in rowElements(11, 18)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -35,7 +36,7 @@
                     </v-card>
                 </v-container>
            
-                <v-container class="element-card row-4" v-for="(element, index) in rowElements(19, 36)" :key="index">
+                <v-container class="element-card row-4" v-for="(element) in rowElements(19, 36)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -46,7 +47,7 @@
                     </v-card>
                 </v-container>
            
-                <v-container class="element-card row-5" v-for="(element, index) in rowElements(37, 54)" :key="index">
+                <v-container class="element-card row-5" v-for="(element) in rowElements(37, 54)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -57,7 +58,7 @@
                     </v-card>
                 </v-container>
            
-                <v-container class="element-card row-6" v-for="(element, index) in rowElements(55, 57)" :key="index">
+                <v-container class="element-card row-6" v-for="(element) in rowElements(55, 57)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -67,7 +68,7 @@
                         <p class="name">{{element.name}}</p>
                     </v-card>
                 </v-container>
-                <v-container class="element-card row-6" v-for="(element, index) in rowElements(72, 86)" :key="index">
+                <v-container class="element-card row-6" v-for="(element) in rowElements(72, 86)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -78,7 +79,7 @@
                     </v-card>
                 </v-container>
            
-                <v-container class="element-card row-7" v-for="(element, index) in rowElements(87, 89)" :key="index">
+                <v-container class="element-card row-7" v-for="(element) in rowElements(87, 89)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -88,7 +89,7 @@
                         <p class="name">{{element.name}}</p>
                     </v-card>
                 </v-container>
-                <v-container class="element-card row-7" v-for="(element, index) in rowElements(104, 118)" :key="index">
+                <v-container class="element-card row-7" v-for="(element) in rowElements(104, 118)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -100,7 +101,7 @@
                 </v-container>
 
                 <p class="lanthanide-label">Lanthanide Series</p>
-                <v-container class="element-card row-8 row-lanthanide" v-for="(element, index) in rowElements(58, 71)" :key="index">
+                <v-container class="element-card row-8 row-lanthanide" v-for="(element) in rowElements(58, 71)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <p class="atomic-number">{{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -112,7 +113,7 @@
                 </v-container>
 
                 <p class="actinide-label">Actinide Series</p>
-                <v-container class="element-card row-9 row-actinide" v-for="(element, index) in rowElements(90, 103)" :key="index">
+                <v-container class="element-card row-9 row-actinide" v-for="(element) in rowElements(90, 103)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
                         <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         <p class="atomic-number">{{element.atomic_number}}</p>
@@ -128,7 +129,12 @@
 
 <script>
 import api from "../../services/Api";
+import ptKey from './ptKey';
+
 export default {
+    components: {
+        ptKey
+    },
     name: "ElementCard",
     data() {
         return {
@@ -166,6 +172,7 @@ p{
 .container{
     max-width: 100%;
     margin-top: 5px !important;
+    align-items: flex-end;
 }
 .symbol{
     margin: 3px 0;
@@ -180,11 +187,11 @@ p{
 }
 .element-card-container{
     display: grid;
-    grid-template-columns: 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px 93px;
+    grid-template-columns: 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px;
     grid-template-rows: 90px 90px 90px 90px 90px 90px 90px 90px 90px;
     grid-gap: 3px;
     max-width: 1750px;
-    width: 100%;
+    width: auto;
 }
 .element-card{
     max-width: 90px;
@@ -462,7 +469,7 @@ p{
 .row-6:nth-of-type(66) > .card-content{
     background-color: #0000ff;
 }
-.row-7:nth-of-type(76) > .card-content,
+.row-7:nth-of-type(76) > .card-content,         /* Transactinides */
 .row-7:nth-of-type(77) > .card-content,
 .row-7:nth-of-type(78) > .card-content,
 .row-7:nth-of-type(79) > .card-content,
