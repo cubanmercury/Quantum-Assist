@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex align-center" style="flex-direction: column;">
+    <div class="container d-flex align-center" style="flex-direction: row; align-items: flex-start;">
     <ptKey />
         <v-container class="element-card-container">
            
@@ -147,7 +147,6 @@ export default {
             api.get("/pt")
             .then(response => {
                 this.elements = response.data;
-                console.log(response.data);
             }).catch(e => {
                 console.log("The error sits here" + e);
             })
@@ -180,14 +179,11 @@ p{
     font-weight: 800;
 }
 .name{
-    font-size: 12px;
-}
-.e-config{
-    font-size: 12px;
+    font-size: 10px;
 }
 .element-card-container{
     display: grid;
-    grid-template-columns: 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px 87px;
+    grid-template-columns: 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3% 5.3%;
     grid-template-rows: 90px 90px 90px 90px 90px 90px 90px 90px 90px;
     grid-gap: 3px;
     max-width: 1750px;
@@ -389,7 +385,7 @@ p{
     background-color: #ff9933;
 }
 .row-1:nth-of-type(2) > .card-content,
-.row-2:nth-of-type(10) > .card-content,      /* Nobel Gases */
+.row-2:nth-of-type(10) > .card-content,      /* Noble Gases */
 .row-3:nth-of-type(18) > .card-content,
 .row-4:nth-of-type(36) > .card-content,
 .row-5:nth-of-type(54) > .card-content,
@@ -401,7 +397,7 @@ p{
 .row-4:nth-of-type(35) > .card-content,
 .row-5:nth-of-type(53) > .card-content,
 .row-6:nth-of-type(71) > .card-content{
-    background-color: #bfbfbf;
+    background-color: #8c8c8c;
 }
 .row-1:nth-of-type(1) > .card-content,
 .row-2:nth-of-type(8) > .card-content,      /* Non Metals */
