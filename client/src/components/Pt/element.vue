@@ -4,19 +4,47 @@
         <v-container class="element-card-container">
            
                 <v-container class="element-card row-1" v-for="(element) in rowElements(1, 2)" :key="element.atomic_number">
-                    <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                    <v-card  class="mx-auto card-content" :raised="raised" @click.stop="$set(modal, element.atomic_number, true)">
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
+                    <v-dialog v-model="modal[element.atomic_number]" dark>
+                        <v-card class="card-modal">
+                            
+                            <v-card  class="card-content modal-card-content" :raised="raised">
+                                <p class="atomic-number">
+                                    {{element.atomic_number}}
+                                    <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                                </p>
+                                <p class="symbol">{{element.symbol}} </p>
+                                <p class="mass-number">{{element.mass_number}}</p>
+                                <p class="name">{{element.name}}</p>
+                            </v-card>
+
+                            <v-card-title class="card-modal-title" primary-title>
+                               {{element.name}}
+                            </v-card-title>
+
+                            <v-card-text>
+                                {{element.symbol}}
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                {{element.mass_number}}
+                            </v-card-text>
+                        </v-card>
+                    </v-dialog>
                 </v-container>
 
                 <v-container class="element-card row-2" v-for="(element) in rowElements(3, 10)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -27,7 +55,8 @@
 
                 <v-container class="element-card row-3" v-for="(element) in rowElements(11, 18)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -38,7 +67,8 @@
            
                 <v-container class="element-card row-4" v-for="(element) in rowElements(19, 36)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -49,7 +79,8 @@
            
                 <v-container class="element-card row-5" v-for="(element) in rowElements(37, 54)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -60,7 +91,8 @@
            
                 <v-container class="element-card row-6" v-for="(element) in rowElements(55, 57)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -70,7 +102,8 @@
                 </v-container>
                 <v-container class="element-card row-6" v-for="(element) in rowElements(72, 86)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -81,7 +114,8 @@
            
                 <v-container class="element-card row-7" v-for="(element) in rowElements(87, 89)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -91,7 +125,8 @@
                 </v-container>
                 <v-container class="element-card row-7" v-for="(element) in rowElements(104, 118)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -103,7 +138,8 @@
                 <p class="lanthanide-label">Lanthanide Series</p>
                 <v-container class="element-card row-8 row-lanthanide" v-for="(element) in rowElements(58, 71)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <p class="atomic-number">{{element.atomic_number}}
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
                         <p class="symbol">{{element.symbol}} </p>
@@ -115,8 +151,10 @@
                 <p class="actinide-label">Actinide Series</p>
                 <v-container class="element-card row-9 row-actinide" v-for="(element) in rowElements(90, 103)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
-                        <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
-                        <p class="atomic-number">{{element.atomic_number}}</p>
+                        <p class="atomic-number">
+                            {{element.atomic_number}}
+                            <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                        </p>
                         <p class="symbol">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
@@ -139,7 +177,8 @@ export default {
     data() {
         return {
             elements: [],
-            raised: true
+            raised: true,
+            modal: {}
         };
     },
     methods: {
@@ -195,6 +234,7 @@ p{
 .element-card .card-content{
     font-size: 14px;
     padding: 5px;
+    cursor: pointer;
 }
 .radioactive{
     width: 15px;
