@@ -13,7 +13,8 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <v-dialog v-model="modal[element.atomic_number]" dark>
+
+                    <v-dialog width="85%" v-model="modal[element.atomic_number]" dark>
                         <v-card class="card-modal">
                             
                             <v-card  class="card-content modal-card-content" :raised="raised">
@@ -26,20 +27,31 @@
                                 <p class="name">{{element.name}}</p>
                             </v-card>
 
-                            <v-card-title class="card-modal-title" primary-title>
-                               {{element.name}}
-                            </v-card-title>
+                            <v-card class="card-modal-stats" >
+                               <span>Element Name: {{element.name}}</span>
+                               <span>Atomic Symbol: {{element.symbol}}</span>
+                               <span>Atomic Number: {{element.atomic_number}}</span>
+                               <span>Mass Number: {{element.mass_number}}</span>
+                               <span>Group: {{element.e_group}}</span>
+                               <span>Period: {{element.e_period}}</span>
+                               <span>Block: {{element.block}}</span>
+                               <span>Electron Configuration: {{element.electron_configuration}}</span>
+                               <span>Radioactive: {{element.radioactive}}</span>
+                            </v-card>
 
                             <v-card-text>
                                 {{element.symbol}}
                             </v-card-text>
                             <v-divider></v-divider>
                             <v-card-text>
-                                {{element.mass_number}}
+                                footer text/links
                             </v-card-text>
                         </v-card>
                     </v-dialog>
                 </v-container>
+
+
+
 
                 <v-container class="element-card row-2" v-for="(element) in rowElements(3, 10)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised">
@@ -244,6 +256,19 @@ p{
 .pt-row{
     width: 100%;
     justify-content: space-between;
+}
+.element-modal{
+    border-radius: 5px;
+    max-width: 85%;
+}
+.card-modal-stats{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    width: 35%;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 5px;
 }
 .row-1{
     grid-row-start: 1;
