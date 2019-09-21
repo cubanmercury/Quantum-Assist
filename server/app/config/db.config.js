@@ -22,5 +22,6 @@ db.sequelize = sequelize;
 //models
 db.elements = require('../models/pt.model.js')(sequelize, Sequelize);
 db.users = require('../models/user.model.js')(sequelize, Sequelize);
+db.isotopes = require('../models/isotopes.model')(sequelize, Sequelize);
 
 module.exports = db;
