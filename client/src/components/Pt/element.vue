@@ -9,13 +9,12 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
                     <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
-
 
                 <v-container class="element-card row-2" v-for="(element) in rowElements(3, 10)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised" @click.stop="$set(modal, element.atomic_number, true)">
@@ -23,7 +22,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -36,7 +35,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -49,7 +48,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -62,7 +61,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -75,7 +74,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -87,7 +86,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -100,7 +99,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -112,7 +111,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -126,7 +125,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>                        
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -140,7 +139,7 @@
                             {{element.atomic_number}}
                             <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
                         </p>
-                        <p class="symbol">{{element.symbol}} </p>
+                        <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
@@ -166,7 +165,12 @@ export default {
         return {
             elements: [],
             raised: true,
-            modal: {}
+            modal: {},
+            states: [
+                {state: "Liquid", colour: "color: #00ff00;", example: "Br"},
+                {state: "Gas", colour: "color: #ff00ff;", example: "H"},
+                {state: "Solid", colour: "color: #000000;", example: "Li"}
+            ]
         };
     },
     methods: {
@@ -182,6 +186,18 @@ export default {
             return this.elements.filter(function(element) {
                 return element.atomic_number >= min && element.atomic_number <= max;
             })
+        },
+        symbolColour(element){
+            if(element.synthetic == true){
+                return 'color: #ff0000';
+            }else{
+                const statesArrayLength = this.states.length; 
+                for(let i = 0; i < statesArrayLength; i++){
+                    if(element.state == this.states[i].state){
+                        return this.states[i].colour;
+                    }
+                }
+            }
         }
     },
     beforeMount() {

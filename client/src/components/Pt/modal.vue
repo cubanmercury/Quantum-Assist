@@ -36,6 +36,9 @@
                 <span>Electronegativity: {{element.electronegativity}}</span>
                 <span>Specific Heat Capacity: {{element.specific_heat_capacity}}</span>
                 <span>Electron Configuration: {{element.electron_configuration}}</span>
+                <span>Element Family: {{element.e_family}}</span>
+                <span>Synthetic: {{element.synthetic}}</span>
+                <span>State at room temperature: {{element.state}}</span>
             </v-card>
 
             <v-card-text>

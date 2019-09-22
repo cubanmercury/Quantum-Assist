@@ -56,6 +56,15 @@ module.exports = (sequelize, Sequelize) => {
         },
         block: {
             type: Sequelize.STRING
+        },
+        synthetic: {
+            type: Sequelize.BOOLEAN
+        },
+        e_family: {
+            type: Sequelize.STRING
+        },
+        state: {
+            type: Sequelize.STRING
         }
     });
     return Element;
