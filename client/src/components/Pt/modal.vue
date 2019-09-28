@@ -56,6 +56,7 @@
 
 <script>
 import isotopeCards from './isotopes';
+import api from "../../services/Api";
 
 export default {
     components:{
@@ -70,16 +71,13 @@ export default {
         modal: {
             type: Object,
             required: true
-        },
-        isotopes: {
-            type: Array,
-            default: () => []
         }
     },
     data() {
         return{
             raised: true,
             localModal: this.modal,
+            isotopes: [],
             types: [
                 {family: "Alkali Metal", colour: "background-color: #3399ff;"},
                 {family: "Alkaline Earth Metal", colour: "background-color: #ff9933;"},
@@ -101,6 +99,14 @@ export default {
         }
     },
     methods: {
+        retrieveIsotopes() {
+            api.get("/pt/isotopes/" + this.element.atomic_number)
+            .then(response => {
+                this.isotopes = response.data;
+            }).catch(e => {
+                console.log("Error retrieving Isotopes from DB: " + e);
+            })
+        },
         cardBackground(element){
             const typesArrayLength = this.types.length;
             for(let i = 0; i < typesArrayLength; i++){
@@ -121,6 +127,9 @@ export default {
                 }
             }
         }
+    },
+    beforeMount() {
+        this.retrieveIsotopes();
     }
 }
 </script>

@@ -10,8 +10,16 @@ exports.findAll = (req, res) => {
         res.status(500).send("Error -> " + err);
     })
 }
-exports.isotopes = (req, res) => {
-    Isotopes.findAll({attributes: ['id', 'atomic_number', 'isotope_name', 'mass_number', 'abundance', 'most_common']})
+
+exports.findIsotopes = (req, res) => {
+    console.log(req.body);
+    const atomicNb = req.params.elementId;
+    Isotopes.findAll({
+        attributes: ['id', 'atomic_number', 'isotope_name', 'mass_number', 'abundance', 'most_common'],
+        where: {
+            atomic_number: atomicNb
+        }
+    })
     .then(isotopes => {
         res.status(200).send(isotopes);
     }).catch(err => {

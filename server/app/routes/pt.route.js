@@ -4,6 +4,6 @@ const elements = require('../controller/pt.controller.js');
 
 router.get('/', elements.findAll);
 
-router.get('/isotopes', elements.isotopes);
+router.get('/isotopes/:elementId', elements.findIsotopes);
 
 module.exports = router;

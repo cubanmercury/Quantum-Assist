@@ -13,7 +13,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
 
                 <v-container class="element-card row-2" v-for="(element) in rowElements(3, 10)" :key="element.atomic_number">
@@ -26,7 +26,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
 
                 <v-container class="element-card row-3" v-for="(element) in rowElements(11, 18)" :key="element.atomic_number">
@@ -39,7 +39,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />                    
+                    <elementModal v-bind:element="element" :modal="modal" />                    
                 </v-container>
            
                 <v-container class="element-card row-4" v-for="(element) in rowElements(19, 36)" :key="element.atomic_number">
@@ -52,7 +52,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
            
                 <v-container class="element-card row-5" v-for="(element) in rowElements(37, 54)" :key="element.atomic_number">
@@ -65,7 +65,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
            
                 <v-container class="element-card row-6" v-for="(element) in rowElements(55, 57)" :key="element.atomic_number">
@@ -78,7 +78,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
                 <v-container class="element-card row-6" v-for="(element) in rowElements(72, 86)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised"  @click.stop="$set(modal, element.atomic_number, true)">
@@ -90,7 +90,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
            
                 <v-container class="element-card row-7" v-for="(element) in rowElements(87, 89)" :key="element.atomic_number">
@@ -103,7 +103,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
                 <v-container class="element-card row-7" v-for="(element) in rowElements(104, 118)" :key="element.atomic_number">
                     <v-card  class="mx-auto card-content" :raised="raised"  @click.stop="$set(modal, element.atomic_number, true)">
@@ -115,7 +115,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
 
                 <p class="lanthanide-label">Lanthanide Series</p>
@@ -129,7 +129,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
 
                 <p class="actinide-label">Actinide Series</p>
@@ -143,7 +143,7 @@
                         <p class="mass-number">{{element.mass_number}}</p>
                         <p class="name">{{element.name}}</p>
                     </v-card>
-                    <elementModal v-bind:element="element" :modal="modal" :isotopes="isotopesOfElement(element)" />
+                    <elementModal v-bind:element="element" :modal="modal" />
                 </v-container>
             
         </v-container>
@@ -164,7 +164,6 @@ export default {
     data() {
         return {
             elements: [],
-            isotopes: [],
             raised: true,
             modal: {},
             states: [
@@ -179,18 +178,8 @@ export default {
             api.get("/pt")
             .then(response => {
                 this.elements = response.data;
-                console.log(this.elements);
             }).catch(e => {
                 console.log("Error retrieving Elements from DB: " + e);
-            })
-        },
-        retrieveIsotopes() {
-            api.get("/pt/isotopes")
-            .then(response => {
-                this.isotopes = response.data;
-                console.log(this.isotopes);
-            }).catch(e => {
-                console.log("Error retrieving Isotopes from DB: " + e);
             })
         },
         rowElements(min, max) {     //method for getting elements per row (min = 1st atomic number, max = last atomic number)
@@ -209,21 +198,10 @@ export default {
                     }
                 }
             }
-        },
-        isotopesOfElement(element){
-            let isotopesOfElement = [];
-            for(let i = 0; i < this.isotopes.length; i++){
-                if(element.atomic_number == this.isotopes[i].atomic_number){
-                    isotopesOfElement.push(this.isotopes[i]);
-                }
-            }
-            return isotopesOfElement;
         }
     },
     beforeMount() {
-        this.retrieveIsotopes();
         this.retrieveElements();
-        
     }
 }
 </script>
