@@ -1,15 +1,25 @@
+<!-- Child component for Periodic Table-->
 <template>
-    <div class="isotope-cards">
-        <v-card  class="card-content isotope-card-content" :raised="raised" :style="cardBackground(element)" v-for="isotope in isotopes" v-bind:key="isotope.id">
-            <p class="atomic-number">
-                {{element.atomic_number}}
-                <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
-            </p>
-            <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>
-            <p class="mass-number">{{isotope.mass_number}}</p>
-            <p class="name">{{isotope.isotope_name}}</p>
-        </v-card>
-    </div>
+    <v-card class="isotope-cards-container" :elevation="elevation">
+        <div class="isotope-cards-title">
+            <h4>Isotopes</h4>
+        </div>
+        <div class="isotopes-cards-content-container">
+            <v-container class="isotope-cards-content" v-for="isotope in isotopes" v-bind:key="isotope.id">
+                <p class="abundance">{{isotope.abundance}}%</p>
+                <v-card  class="card-content modal-card-content" :raised="raised" :style="cardBackground(element)" >
+                    <p class="atomic-number">
+                        {{element.atomic_number}}
+                        <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
+                    </p>
+                    <p class="symbol" :style="symbolColour(element)">{{element.symbol}} </p>
+                    <p class="mass-number">{{isotope.mass_number}}</p>
+                    <p class="name">{{isotope.isotope_name}}</p>
+                </v-card>
+                <p class="most-common" v-if="isotope.most_common == true">*Most Common</p>
+            </v-container>
+        </div>
+    </v-card>
 </template>
 
 <script>
@@ -23,6 +33,9 @@ export default {
         isotopes: {
             type: Array,
             default: () => []
+        },
+        elevation: {
+            type: Number
         }
     },
     data() {
@@ -74,5 +87,40 @@ export default {
 </script>
 
 <style scoped>
-
+.isotope-cards-container{
+    display: flex;
+    flex-flow: column nowrap;
+    width: auto;
+    text-align: left;
+    border-radius: 10px;
+    padding-bottom: 5px;
+}
+.isotopes-cards-content-container{
+    display: flex;
+    text-align: center;
+}
+.isotope-cards-title{
+    padding: 5px 20px;
+}
+.isotope-cards-title h4{
+    font-size: 1rem;
+}
+.abundance{
+    margin-bottom: 5px;
+}
+.most-common{
+    margin: 0;
+    color: #fff;
+    font-size: 0.8rem;
+}
+.card-content{
+    min-width: 100px;
+}
+.card-content p{
+    margin-bottom: 0;
+}
+.card-content .name{
+    padding-bottom: 10px;
+    margin-bottom: 5px !important;
+}
 </style>

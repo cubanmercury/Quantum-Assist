@@ -7,7 +7,7 @@
             <span class="card-modal-title">{{element.name}}</span>
             
             <div class="row-1" >
-                <v-card  class="card-content modal-card-content" :raised="raised" :style="cardBackground(element)">
+                <v-card  class="card-content modal-card-content" :elevation="elevation" :raised="raised" :style="cardBackground(element)">
                     <p class="atomic-number">
                         {{element.atomic_number}}
                         <img class="radioactive" v-if="element.radioactive === true" src="../../../public/nuclear.svg" alt="radioactive">
@@ -16,11 +16,11 @@
                     <p class="mass-number">{{element.mass_number}}</p>
                     <p class="name">{{element.name}}</p>
                 </v-card>
+
+                <isotopeCards v-bind:element="element" :isotopes="isotopes" :elevation="elevation" />
             </div>
 
-            <isotopeCards v-bind:element="element" :isotopes="isotopes" />
-
-            <v-card class="card-modal-stats" >
+            <v-card class="card-modal-stats" :elevation="elevation" >
                 <span>Element Name: {{element.name}}</span>
                 <span>Atomic Symbol: {{element.symbol}}</span>
                 <span>Atomic Number: {{element.atomic_number}}</span>
@@ -43,9 +43,6 @@
                 <span>State at room temperature: {{element.state}}</span>
             </v-card>
 
-            <v-card-text>
-                {{element.symbol}}
-            </v-card-text>
             <v-divider></v-divider>
             <v-card-text>
                 footer text/links
@@ -76,6 +73,7 @@ export default {
     data() {
         return{
             raised: true,
+            elevation: 24,
             localModal: this.modal,
             isotopes: [],
             types: [
@@ -135,32 +133,34 @@ export default {
 </script>
 
 <style scoped>
-.symbol{
-    margin: 3px 0;
-    font-size: 20px;
-    font-weight: 800;
-}
-.name{
-    font-size: 10px;
-}
-.radioactive{
-    width: 15px;
-    position: absolute;
-    right: 5px;
-}  
 .card-modal{
     padding: 25px;
     border-radius: 15px;
 }
 .card-modal-title{
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
 }
-.modal-card-content{
-    width: 7%;
-    margin: 0 15px;
-    border-radius: 5px !important;
-    color: #000 !important;
+.row-1{
+    display: flex;
+}
+.card-content{
+    min-width: 125px;
+    width: 10%;
+    font-size: 1.2rem;
+}
+.card-content{
+    margin-bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.symbol{
+    font-size: 3rem;
+}
+.name{
+    font-size: 1.2rem;
 }
 .card-modal-stats{
     display: flex;

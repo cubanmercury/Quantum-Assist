@@ -12,7 +12,6 @@ exports.findAll = (req, res) => {
 }
 
 exports.findIsotopes = (req, res) => {
-    console.log(req.body);
     const atomicNb = req.params.elementId;
     Isotopes.findAll({
         attributes: ['id', 'atomic_number', 'isotope_name', 'mass_number', 'abundance', 'most_common'],
