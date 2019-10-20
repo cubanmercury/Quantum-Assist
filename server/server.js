@@ -14,14 +14,12 @@ const corsOptions = {
 }
 const app = express();
 
-app.use(passport.initialize());
-app.use(passport.session());
 //middleware
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 app.use(cookieParser());
 app.use(session({
@@ -31,12 +29,15 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-
-require('./app/config/user.auth.js')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 client.on('error', (err) => {
     console.log('Redis error: ', err);
 });
+
+//Load passport strategies
+require('./app/config/passport/passport')(passport);
 
 const db = require('./app/config/db.config'),
     sequelize = db.sequelize,

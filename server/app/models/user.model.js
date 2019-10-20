@@ -1,10 +1,9 @@
 //required in config/db.config.js
-
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define('user', {
         id: {
-            autoIncrement: true,
             primaryKey: true,
+            autoIncrement: true,
             type: Sequelize.INTEGER
         },
         u_email: {
@@ -25,13 +24,10 @@ module.exports = (sequelize, Sequelize) => {
         is_admin: {
             type: Sequelize.BOOLEAN,
             defaultValue: false,
-            allowNull: false
         },
         u_signedUp: {
             type: Sequelize.DATE,
-            allowNull: false
         }
     });
     return User;
 }
-
