@@ -12,8 +12,8 @@
             </ul>
         </v-alert>
         <v-form class="login-form" id="loginForm">
-            <v-text-field :counter="15" required type="text" name="username" v-model="username" placeholder="Username"></v-text-field>
-            <v-text-field required type="password" name="password" v-model="password" placeholder="Password"></v-text-field>
+            <v-text-field :counter="15" required type="text" name="email" v-model="email" placeholder="Email"></v-text-field>
+            <v-text-field required type="password" name="password" v-model="password" placeholder="Password"></v-text-field>uyfgfhvhkkkkkkkkkkkkkkkkkkkkkkkkkkk
             <v-btn @click="checkForm" id="login-btn">Login</v-btn>
         </v-form>
     </div>
@@ -24,7 +24,7 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
     data(){
         return {
-            username: "",
+            email: "",
             password: "",
             errors: [],
             success: []
@@ -33,8 +33,8 @@ export default {
     methods: {
         checkForm(e){
             this.errors = [];
-            if(!this.username){
-                this.errors.push('Username Required');
+            if(!this.email){
+                this.errors.push('Email Required');
             }
             else if(!this.password){
                 this.errors.push('Password Required');
@@ -44,15 +44,17 @@ export default {
                 this.login();
             }
         },
-        async login(){
+        login(){
             this.success = [];
             try{
-               const response = await AuthenticationService.login({
-                   u_username: this.username,
-                   u_hashedPwd: this.password
+                console.log(this.email);
+                console.log(this.password);
+                const response = AuthenticationService.login({
+                    u_email: this.email,
+                    u_hashedPwd: this.password
                 });
                 this.success.push(response);
-                this.username = "";
+                this.email = "";
                 this.password = "";
             }
             catch(e){

@@ -13,7 +13,6 @@
 		</ul>
 	</p>
 	<v-form class="register-form" id="registerForm" novalidate="true">
-		<v-text-field required :counter="15" type="text" name="username" v-model="username" placeholder="Username"></v-text-field>
 		<v-text-field type="email" name="email" v-model="email" placeholder="Email"></v-text-field>
 		<v-text-field type="text" name="name" v-model="name" placeholder="Name"></v-text-field>
 		<v-text-field type="password" name="password" v-model="password" placeholder="Password"></v-text-field>
@@ -31,7 +30,6 @@ export default {
   },
   data() {
         return {
-            username: '',
             email: '',
             name: '',
             password: '',
@@ -46,19 +44,18 @@ export default {
             let d = new Date();
             let dateString = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             try{
-               const response = await AuthenticationService.register({
-                u_username: this.username,
-                u_email: this.email,
-                u_name: this.name,
-                u_hashedPwd: this.password,
-                u_signedUp: dateString
+                const response = await AuthenticationService.register({
+                    email: this.email,
+                    name: this.name,
+                    password: this.password,
+                    u_signedUp: dateString
                 });
+                console.log(response);
                 this.success.push(response);
-                this.username = "";
-                this.email = "";
-                this.name = "";
-                this.password = "";
-                this.password2 = "";
+                // this.email = "";
+                // this.name = "";
+                // this.password = "";
+                // this.password2 = "";
             }catch(e){
                 if(e.response){
                     this.errors.push(e.response.data.err);
@@ -72,10 +69,7 @@ export default {
         },
         checkForm(e) {
             this.errors = [];
-            if(!this.username){
-                this.errors.push('Username Required');
-            }
-            else if(!this.email){
+            if(!this.email){
                 this.errors.push('Email Required');
             }
             else if(!this.validEmail(this.email)){
@@ -87,7 +81,6 @@ export default {
             else{
                 e.preventDefault();
                 this.register();
-                
             }
             e.preventDefault();
         },

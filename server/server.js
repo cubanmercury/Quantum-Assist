@@ -7,6 +7,7 @@ const redis = require('redis');
 const client = redis.createClient();
 const redisStore = require('connect-redis')(session);
 const passport = require('passport');
+const flash = require('connect-flash');
 const cors = require('cors');
 const corsOptions = {
     origin: 'http://localhost:8080',
@@ -31,6 +32,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 client.on('error', (err) => {
     console.log('Redis error: ', err);
