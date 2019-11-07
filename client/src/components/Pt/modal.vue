@@ -171,4 +171,7 @@ export default {
     padding: 15px;
     border-radius: 5px;
 }
+.v-dialog__content{
+    justify-content: flex-end !important;
+}
 </style>
